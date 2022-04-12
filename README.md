@@ -38,3 +38,13 @@ kubectl create -f pg-r34-wofix.yaml
 kubectl create -f pg-r35-wfix.yaml
 kubectl create -f pg-r35-wofix.yaml
 ```
+
+5. Port forward and open Grafana Dashboard
+
+```
+kubectl port-forward sts/prometheus-kube-prometheus-stack-prometheus 9090:9090 -n monitoring
+
+kubectl port-forward deploy/kube-prometheus-stack-grafana 3000:3000 -n monitoring
+```
+
+6. Install grafana-dashboard.json
