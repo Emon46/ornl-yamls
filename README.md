@@ -1,3 +1,5 @@
+
+```bash
 helm install kubedb appscode/kubedb \
   --version v2022.03.28 \
   --namespace kubedb --create-namespace \
@@ -10,4 +12,4 @@ helm install kubedb appscode/kubedb \
   --set kubedb-provisioner.operator.registry=hremon331046 \
   --set kubedb-provisioner.operator.repository=operator \
   --set kubedb-provisioner.operator.tag=raft-metrics-exporter_linux_amd64
-
+```
