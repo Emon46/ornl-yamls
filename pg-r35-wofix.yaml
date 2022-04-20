@@ -2,7 +2,7 @@ apiVersion: kubedb.com/v1alpha2
 kind: Postgres
 metadata:
   name: pg-r35-wofix
-  namespace: demo
+  namespace: platform-atlassian-staging
 spec:
   monitor:
     agent: prometheus.io/operator
