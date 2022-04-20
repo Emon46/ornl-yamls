@@ -65,4 +65,9 @@ helm upgrade -i panopticon appscode/panopticon \
     --set-file license=/path/to/license.txt
 ```
 
+```
+helm upgrade -i kubedb-metrics appscode/kubedb-metrics \
+    -n kubedb-operator --create-namespace
+```
+
 7. Install grafana-dashboard.json
