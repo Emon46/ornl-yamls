@@ -1,6 +1,16 @@
 1. Upgrade kubedb operator
 
 ```bash
+helm upgrade -i kubedb-operator appscode/kubedb \
+  -n kubedb-operator \
+  --version v2022.03.28 \
+  --reuse-values \
+  --set kubedb-provisioner.operator.registry=kubedb \
+  --set kubedb-provisioner.operator.repository=operator \
+  --set kubedb-provisioner.operator.tag=raft-metrics-exporter_linux_amd64
+```
+
+```bash
 helm install kubedb appscode/kubedb \
   --version v2022.03.28 \
   --namespace kubedb --create-namespace \
@@ -10,7 +20,7 @@ helm install kubedb appscode/kubedb \
   --set kubedb-dashboard.enabled=true \
   --set kubedb-schema-manager.enabled=true \
   --set-file global.license=kubedb-enterprise-license-579bb78c-b616-49ce-af34-768c27f402fd.txt \
-  --set kubedb-provisioner.operator.registry=hremon331046 \
+  --set kubedb-provisioner.operator.registry=kubedb \
   --set kubedb-provisioner.operator.repository=operator \
   --set kubedb-provisioner.operator.tag=raft-metrics-exporter_linux_amd64
 ```
