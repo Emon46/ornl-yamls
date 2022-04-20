@@ -1,0 +1,142 @@
+apiVersion: kubedb.com/v1alpha2
+kind: Postgres
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"kubedb.com/v1alpha2","kind":"Postgres","metadata":{"annotations":{},"labels":{"app.kubernetes.io/instance":"staging","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"confluence-db","helm.sh/chart":"confluence-db-1.0.4"},"name":"confluence-db-staging","namespace":"platform-atlassian-staging"},"spec":{"authSecret":{"name":"confluence-db-staging-auth"},"configSecret":{"name":"confluence-db-staging-config"},"leaderElection":{"electionTick":15,"heartbeatTick":1,"maximumLagBeforeFailover":33554432,"period":"300ms"},"podTemplate":{"spec":{"containerSecurityContext":{"capabilities":{"add":["IPC_LOCK","SYS_RESOURCE"]},"privileged":false,"runAsGroup":1001140000,"runAsUser":1001140000},"resources":{"limits":{"cpu":"8","memory":"12Gi"},"requests":{"cpu":"8","memory":"12Gi"}},"securityContext":{"fsGroup":1001140000,"runAsGroup":1001140000,"runAsUser":1001140000}}},"replicas":3,"serviceTemplates":[{"alias":"primary","spec":{"type":"NodePort"}}],"standbyMode":"Warm","storage":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"50Gi"}},"storageClassName":"netapp-block"},"storageType":"Durable","streamingMode":"Asynchronous","terminationPolicy":"Halt","version":"11.11-debian"}}
+  creationTimestamp: "2022-04-07T16:33:52Z"
+  finalizers:
+  - kubedb.com
+  generation: 1
+  labels:
+    app.kubernetes.io/instance: staging
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: confluence-db
+    helm.sh/chart: confluence-db-1.0.4
+  name: confluence-db-staging
+  namespace: platform-atlassian-staging
+  resourceVersion: "1770800303"
+  selfLink: /apis/kubedb.com/v1alpha2/namespaces/platform-atlassian-staging/postgreses/confluence-db-staging
+  uid: 22c8a1b7-dd86-4a7a-9393-8f2554454e1d
+spec:
+  allowedSchemas:
+    namespaces:
+      from: Same
+  authSecret:
+    name: confluence-db-staging-auth
+  clientAuthMode: md5
+  configSecret:
+    name: confluence-db-staging-config
+  coordinator:
+    resources:
+      limits:
+        memory: 256Mi
+      requests:
+        cpu: 200m
+        memory: 256Mi
+  leaderElection:
+    electionTick: 15
+    heartbeatTick: 1
+    maximumLagBeforeFailover: 33554432
+    period: 300ms
+  podTemplate:
+    controller: {}
+    metadata: {}
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/instance: confluence-db-staging
+                  app.kubernetes.io/managed-by: kubedb.com
+                  app.kubernetes.io/name: postgreses.kubedb.com
+              namespaces:
+              - platform-atlassian-staging
+              topologyKey: kubernetes.io/hostname
+            weight: 100
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/instance: confluence-db-staging
+                  app.kubernetes.io/managed-by: kubedb.com
+                  app.kubernetes.io/name: postgreses.kubedb.com
+              namespaces:
+              - platform-atlassian-staging
+              topologyKey: failure-domain.beta.kubernetes.io/zone
+            weight: 50
+      containerSecurityContext:
+        capabilities:
+          add:
+          - IPC_LOCK
+          - SYS_RESOURCE
+        privileged: false
+        runAsGroup: 1001140000
+        runAsUser: 1001140000
+      resources:
+        limits:
+          cpu: "8"
+          memory: 12Gi
+        requests:
+          cpu: "8"
+          memory: 12Gi
+      securityContext:
+        fsGroup: 1001140000
+        runAsGroup: 1001140000
+        runAsUser: 1001140000
+      serviceAccountName: confluence-db-staging
+  replicas: 3
+  serviceTemplates:
+  - alias: primary
+    metadata: {}
+    spec:
+      type: NodePort
+  sslMode: disable
+  standbyMode: Warm
+  storage:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 50Gi
+    storageClassName: netapp-block
+  storageType: Durable
+  streamingMode: Asynchronous
+  terminationPolicy: Halt
+  version: 11.11-debian
+status:
+  conditions:
+  - lastTransitionTime: "2022-04-07T16:33:52Z"
+    message: 'The KubeDB operator has started the provisioning of Postgres: platform-atlassian-staging/confluence-db-staging'
+    reason: DatabaseProvisioningStartedSuccessfully
+    status: "True"
+    type: ProvisioningStarted
+  - lastTransitionTime: "2022-04-20T15:55:13Z"
+    message: All replicas are ready and in Running state
+    observedGeneration: 1
+    reason: AllReplicasReady
+    status: "True"
+    type: ReplicaReady
+  - lastTransitionTime: "2022-04-20T15:47:06Z"
+    message: 'The PostgreSQL: platform-atlassian-staging/confluence-db-staging is
+      accepting client requests.'
+    observedGeneration: 1
+    reason: DatabaseAcceptingConnectionRequest
+    status: "True"
+    type: AcceptingConnection
+  - lastTransitionTime: "2022-04-20T15:55:13Z"
+    message: DB is ready because of server getting Online and Running state
+    observedGeneration: 1
+    reason: ReadinessCheckSucceeded
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2022-04-07T16:35:20Z"
+    message: 'The PostgreSQL: platform-atlassian-staging/confluence-db-staging is
+      successfully provisioned.'
+    observedGeneration: 1
+    reason: DatabaseSuccessfullyProvisioned
+    status: "True"
+    type: Provisioned
+  observedGeneration: 1
+  phase: Ready

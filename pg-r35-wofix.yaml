@@ -23,8 +23,8 @@ spec:
           - IPC_LOCK
           - SYS_RESOURCE
         privileged: false
-        runAsGroup: 999
-        runAsUser: 999
+        runAsGroup: 1001140000
+        runAsUser: 1001140000
       resources:
         limits:
           memory: 1Gi
@@ -32,9 +32,9 @@ spec:
           cpu: 500m
           memory: 1Gi
       securityContext:
-        fsGroup: 999
-        runAsGroup: 999
-        runAsUser: 999
+        fsGroup: 1001140000
+        runAsGroup: 1001140000
+        runAsUser: 1001140000
   replicas: 3
   sslMode: disable
   standbyMode: Hot
@@ -44,7 +44,7 @@ spec:
     resources:
       requests:
         storage: 1Gi
-    storageClassName: linode-block-storage
+    storageClassName: netapp-block
   storageType: Durable
   terminationPolicy: Delete
   version: 11.11-pg-0.6.0-raft-new
