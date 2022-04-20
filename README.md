@@ -57,4 +57,12 @@ kubectl port-forward sts/prometheus-kube-prometheus-stack-prometheus 9090:9090 -
 kubectl port-forward deploy/kube-prometheus-stack-grafana 3000:3000 -n monitoring
 ```
 
-6. Install grafana-dashboard.json
+6. Install panopticon
+
+```
+helm upgrade -i panopticon appscode/panopticon \
+    -n kubedb-operator --create-namespace \
+    --set-file license=/path/to/license.txt
+```
+
+7. Install grafana-dashboard.json
