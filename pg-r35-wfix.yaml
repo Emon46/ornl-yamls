@@ -35,6 +35,7 @@ spec:
         fsGroup: 1001140000
         runAsGroup: 1001140000
         runAsUser: 1001140000
+      serviceAccountName: confluence-db-staging
   replicas: 3
   sslMode: disable
   standbyMode: Hot
